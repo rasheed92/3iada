@@ -1,0 +1,30 @@
+{
+  "name": "3iada",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "parcel index.html"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@reactions/component": "^2.0.2",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^8.0.4",
+    "babel-preset-env": "^1.7.0",
+    "evergreen-ui": "^4.7.1",
+    "firebase": "^5.5.9",
+    "html2canvas": "^1.0.0-alpha.12",
+    "jspdf": "^1.4.1",
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3",
+    "react-modal": "^3.6.1",
+    "styled-components": "^4.1.1"
+  },
+  "devDependencies": {
+    "babel-preset-react": "^6.24.1"
+  }
+}
