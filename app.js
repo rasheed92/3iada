@@ -7,6 +7,7 @@ import Context from './Context'
 
 import Header from './Header'
 import RecipeList from './RecipeList'
+import DrugsList from'./DrugsList';
 
 var config = {
   apiKey: "AIzaSyBM0ZeCdpJ-FMNlmYFV52O-SNd0zPdJzPM",
@@ -25,31 +26,7 @@ class App extends React.Component {
     this.state = {
       modalState: false,
       Patient_name: '',
-      drugs: ["Acamprosate Calcium",
-        "Accretropin",
-        "Aceon",
-        "Aci-Jel",
-        "Acthrel",
-        "Actimmune",
-        "Actisite",
-        "Acular",
-        "Acular LS",
-        "Acuvail",
-        "Adagen",
-        "Adapalene",
-        "Adcirca",
-        "Adefovir Dipivoxil",
-        "Adenoscan",
-        "Adenosine",
-        "Adipex-P",
-        "AdreView",
-        "Advair HFA",
-        "Aerospan HFA",
-        "Agalsidase Beta",
-        "Aggrenox",
-        "Akineton",
-        "Alamast",
-        "Albenza",],
+      drugs: DrugsList,
       Patient_Age: '',
       Medication_Dose: '',
       Medication_Name: '',
