@@ -82,10 +82,10 @@ class RecipeList extends React.Component {
                                                 firebase.firestore().collection('recipe').add({
                                                     Patient_name: ctx.state.Patient_name,
                                                     Medication_Name: ctx.state.Medication_Name,
-                                                    Medication_Dose: ctx.state.Medication_Dose,
+                                                 
                                                     Patient_Age: ctx.state.Patient_Age,
                                                     Gender: ctx.state.Gender,
-                                                    Patient_nots: ctx.state.Patient_nots,
+                                                   
                                                     date: today
 
                                                 })
@@ -139,11 +139,6 @@ class RecipeList extends React.Component {
                                                                 selectedNames
                                                             })
 
-
-
-                                                            //console.log(selected)
-
-
                                                             ctx.actions.onChangeMedicationName(selectedItems)
                                                         }
                                                         }
@@ -180,17 +175,6 @@ class RecipeList extends React.Component {
                                                     </SelectMenu>
                                                 )}
                                             </Component>
-
-
-
-
-
-
-                                            <TextInput width="90%" margin={10} height={48}
-                                                onChange={(event) => { ctx.actions.onChangeMedicationDose(event.target.value) }}
-                                                value={ctx.state.Medication_Dose}
-                                                placeholder="Medication Dose "
-                                                type="text" />
                                             <Combobox
                                                 openOnFocus
                                                 width="90%" height={48} margin={10}
@@ -198,12 +182,6 @@ class RecipeList extends React.Component {
                                                 onChange={selected =>
                                                     ctx.actions.onChangeGender(selected)}
                                                 placeholder="Gender"
-                                            />
-                                            <Textarea width="90%" margin={10} height={48}
-                                                name="textarea-1"
-                                                placeholder="Nots"
-                                                onChange={(event) => { ctx.actions.onChangePatientNots(event.target.value) }}
-                                                value={ctx.state.Patient_nots}
                                             />
 
 
@@ -253,7 +231,7 @@ class RecipeList extends React.Component {
                                                 <Table.TextCell isNumber >
                                                     <Heading size={500}>{profile.date}</Heading>
                                                 </Table.TextCell>
-                                                <Table.TextCell ><Button size={500}
+                                                <Table.TextCell ><Button size={500} appearance="primary" iconAfter="download"
                                                     onClick={() => {
 
                                                         var doc = new jsPDF();
@@ -262,22 +240,24 @@ class RecipeList extends React.Component {
                                                         var name = profile.Patient_name;
                                                         var Medication_Name = profile.Medication_Name;
                                                         var Gender = profile.Gender;
-                                                        var Medication_Dose = profile.Medication_Dose;
                                                         var Patient_Age = profile.Patient_Age;
                                                         var time = profile.date.toString();
                                                         doc.setFontSize(14);
                                                         doc.setTextColor(0, 0, 0);
-
+                                                        doc.setLineWidth(3.0); 
                                                         doc.text(29, 70, name);
                                                         doc.text(105, 70, Patient_Age);
                                                         doc.text(138, 70, Gender);
                                                         doc.text(167, 70, time);
-                                                        // doc.text(80, 70, Medication_Name);
-                                                        doc.text(27, 162, Medication_Dose);
+                                                        doc.setFontSize(25);
+                                                        doc.setTextColor(4, 73, 148);
+                                                        doc.text(15, 100, Medication_Name);
+                                                        doc.setFontSize(8);
+                                                        doc.setTextColor(0, 0, 0);
                                                         console.log(time)
                                                         doc.save(name + 'recipe.pdf');
                                                     }}
-                                                > Export Recipe His</Button></Table.TextCell>
+                                                > Export His Recipe </Button></Table.TextCell>
                                             </Table.Row>
                                         ))}
                                 </Table.Body>
