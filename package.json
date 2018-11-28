@@ -12,9 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "@reactions/component": "^2.0.2",
-    "babel-core": "^6.26.3",
     "babel-loader": "^8.0.4",
-    "babel-preset-env": "^1.7.0",
     "evergreen-ui": "^4.7.1",
     "firebase": "^5.5.9",
     "html2canvas": "^1.0.0-alpha.12",
@@ -25,6 +23,8 @@
     "styled-components": "^4.1.1"
   },
   "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1"
   }
 }
