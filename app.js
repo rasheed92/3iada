@@ -35,8 +35,9 @@ class App extends React.Component {
       recipe: []
 
     }
-
-    firebase.firestore().collection('recipe').onSnapshot((snapshot) => {
+    
+//here bring data from firebase orderBy date
+    firebase.firestore().collection('recipe').orderBy('date','desc').onSnapshot((snapshot) => {
       let recipe = []
 
       snapshot.forEach((doc) => {
@@ -55,37 +56,30 @@ class App extends React.Component {
       <Context.Provider value={{
         state: this.state,
         actions: {
+          //this function use to set  Gender value 
           onChangeGender: (value) => {
             this.setState({
               Gender: value
             })
           },
+          //this function use to set  Age value 
           onChangePatientAge: (value) => {
             this.setState({
               Patient_Age: value
             })
           },
+           //this function use to set  Medication Name value 
           onChangeMedicationName: (selected) => {
             this.setState({
               Medication_Name: selected
             })
-            console.log("onChangeMedicationName")
           },
+          //this function use to set  Patient name value 
           onChangePatientName: (value) => {
             this.setState({
               Patient_name: value
             })
           },
-          onChangePatientNots: (value) => {
-            this.setState({
-              Patient_nots: value
-            })
-          },
-          onChangeMedicationDose: (value) => {
-            this.setState({
-              Medication_Dose: value
-            })
-          }
         }
       }}>
         <Header />

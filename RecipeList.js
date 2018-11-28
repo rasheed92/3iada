@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import jsPDF from 'jspdf';
-import { Heading, Table, Button, TextInput, Pane, Dialog, Combobox,  Textarea, SelectMenu } from 'evergreen-ui'
+import { Heading, Table, Button, TextInput, Pane, Dialog, Combobox, SelectMenu } from 'evergreen-ui'
 import Component from "@reactions/component";
 import Context from './Context'
 import Base64img from './Base64img'
@@ -23,7 +23,7 @@ background-color: #466AB3;
   height: 50px;
   margin-top: 16px
 `
-let SearchBox = styled.div`
+let AddBox = styled.div`
 padding: 0px 32%;
 margin-top: 18px;
 margin-bottom: 30px;
@@ -43,7 +43,7 @@ class RecipeList extends React.Component {
                 {(ctx) => {
                     return <div>
 
-                        <SearchBox>
+                        <AddBox>
 
                             <Component
                                 initialState={{ isShown: false, isLoading: false }}
@@ -67,6 +67,9 @@ class RecipeList extends React.Component {
                                             onCloseComplete={() => setState({ isShown: false, isLoading: false })}
                                             isConfirmLoading={state.isLoading}
                                             onConfirm={() => {
+
+
+                                                //here convert the date to human readable
                                                 var today = new Date();
                                                 var dd = today.getDate();
                                                 var mm = today.getMonth() + 1; //January is 0!
@@ -79,13 +82,15 @@ class RecipeList extends React.Component {
                                                     mm = '0' + mm;
                                                 }
                                                 var today = dd + '/' + mm + '/' + yyyy;
+
+                                                //here add a new recipe
                                                 firebase.firestore().collection('recipe').add({
                                                     Patient_name: ctx.state.Patient_name,
                                                     Medication_Name: ctx.state.Medication_Name,
-                                                 
+
                                                     Patient_Age: ctx.state.Patient_Age,
                                                     Gender: ctx.state.Gender,
-                                                   
+
                                                     date: today
 
                                                 })
@@ -192,7 +197,7 @@ class RecipeList extends React.Component {
                                 )}
                             </Component>
 
-                        </SearchBox>
+                        </AddBox>
 
                         <Container>
 
@@ -211,7 +216,7 @@ class RecipeList extends React.Component {
                                     </Table.TextHeaderCell>
                                     <Table.TextHeaderCell>
                                         <Heading size={600}>
-                                            Date
+                                            Visit Date
   </Heading>
 
                                     </Table.TextHeaderCell>
@@ -222,7 +227,7 @@ class RecipeList extends React.Component {
 
                                     </Table.TextHeaderCell>
                                 </Table.Head>
-                                <Table.Body height={700}>
+                                <Table.Body height={500}>
                                     {
                                         ctx.state.recipe.map(profile => (
                                             <Table.Row key={profile.id}  >
@@ -234,6 +239,7 @@ class RecipeList extends React.Component {
                                                 <Table.TextCell ><Button size={500} appearance="primary" iconAfter="download"
                                                     onClick={() => {
 
+                                                        //this function to export recipe to pdf
                                                         var doc = new jsPDF();
                                                         var imgData = Base64img;
                                                         doc.addImage(imgData, 'JPEG', 0, 0, 210, 297);
@@ -244,7 +250,7 @@ class RecipeList extends React.Component {
                                                         var time = profile.date.toString();
                                                         doc.setFontSize(14);
                                                         doc.setTextColor(0, 0, 0);
-                                                        doc.setLineWidth(3.0); 
+                                                        doc.setLineWidth(3.0);
                                                         doc.text(29, 70, name);
                                                         doc.text(105, 70, Patient_Age);
                                                         doc.text(138, 70, Gender);
@@ -257,7 +263,7 @@ class RecipeList extends React.Component {
                                                         console.log(time)
                                                         doc.save(name + 'recipe.pdf');
                                                     }}
-                                                > Export His Recipe </Button></Table.TextCell>
+                                                > Download As PDF</Button></Table.TextCell>
                                             </Table.Row>
                                         ))}
                                 </Table.Body>
